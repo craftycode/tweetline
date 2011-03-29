@@ -1,0 +1,10 @@
+This is the initial proof of concept for a twitter command line tool.  Now that I understand the problem, I am currently in the process of writing a more robust implementation.
+
+Until I release tweetline gem you will need to put the "tl" file in a folder in your path and make it executable.
+
+Until I get access to xAuth you will have to create a ~/.tweetlinerc yaml file with your authentication credentials like the following...
+
+:consumer_key: "your-key"
+:consumer_secret: "your-secret"
+:oauth_token: "your-token"
+:oauth_token_secret: "your-secret"
