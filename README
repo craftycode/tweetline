@@ -1,10 +1,36 @@
 This is the initial proof of concept for a twitter command line tool.  Now that I understand the problem, I am currently in the process of writing a more robust implementation.
 
-Until I release tweetline gem you will need to put the "tl" file in a folder in your path and make it executable.
+== Getting Started
 
-Until I get access to xAuth you will have to create a ~/.tweetlinerc yaml file with your authentication credentials like the following...
+1. Install Tweetline at the command prompt if you haven't yet:
 
-:consumer_key: "your-key"
-:consumer_secret: "your-secret"
-:oauth_token: "your-token"
-:oauth_token_secret: "your-secret"
+    gem install tweetline
+
+2. Until Twitter approves xAuth for Tweetline, you will have to create a ~/.tweetlinerc yaml file with your authentication credentials like the following...
+
+    :consumer_key: "your-key"
+    :consumer_secret: "your-secret"
+    :oauth_token: "your-token"
+    :oauth_token_secret: "your-secret"
+
+3. Enter commands with tl:
+
+    tl ls
+
+    ESV Daily Verse (@esvdaily) [04:46 AM]
+         A friend loves at all times, and a brother is born for adversity. http://esv.to/Pr17.17 (54842265859915777)
+
+    DHH (@dhh) [04/02/11 11:43 AM]
+         I've tried many answers for "what do you get out of working on open source?", but the truth is the act of creation is its own reward. (54222543829213184)
+
+== Commands
+
+* cat id
+* json
+* ls [screenname]
+* retweet id
+* say
+* tail [-f] [-n <number>]
+* update "New twitter status."
+* yaml
+
