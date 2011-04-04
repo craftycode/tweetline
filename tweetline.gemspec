@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.name = "tweetline"
   s.version = "0.0.1"
   s.summary = "Command line client for Twitter."
-  s.description = "Tweetline is a command line Twitter client for those who can't imagine a better interface to anything than the command line.  Also, some folks may find it useful for automating some Twitter interactions."
+  s.description = "Tweetline is a command line Twitter client for those who can't imagine a better interface to anything than the command line.  Also, some folks may find it useful for automating Twitter interactions."
 
   s.required_ruby_version = ">= 1.8.7"
   s.required_rubygems_version = ">= 1.3.6"
