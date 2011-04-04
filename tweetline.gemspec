@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
 
   s.bindir = "bin"
   s.executables = ["tl"]
-  s.default_executable = = "tl"
+  s.default_executable = "tl"
 
   s.add_dependency('twitter', '~> 1.2.0')
   s.add_dependency('json', '~> 1.5.1')
