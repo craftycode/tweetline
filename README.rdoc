@@ -18,10 +18,12 @@ This is the initial proof of concept for a twitter command line tool.  Now that 
 tl ls
 
 ESV Daily Verse (@esvdaily) [04:46 AM]
-     A friend loves at all times, and a brother is born for adversity. http://esv.to/Pr17.17 (54842265859915777)
+
+A friend loves at all times, and a brother is born for adversity. http://esv.to/Pr17.17 (54842265859915777)
 
 DHH (@dhh) [04/02/11 11:43 AM]
-     I've tried many answers for "what do you get out of working on open source?", but the truth is the act of creation is its own reward. (54222543829213184)
+
+I've tried many answers for "what do you get out of working on open source?", but the truth is the act of creation is its own reward. (54222543829213184)
 
 == Tasks
 
