@@ -106,7 +106,7 @@ module Tweetline
       end
     end
 
-    desc "yaml", "Lists tweets from the timeline if YAML format."
+    desc "yaml", "Lists tweets from the timeline in YAML format."
     def yaml
       Tweetline.each_tweet do |tweet|
         puts tweet.to_yaml

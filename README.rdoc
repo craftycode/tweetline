@@ -15,22 +15,24 @@ This is the initial proof of concept for a twitter command line tool.  Now that 
 
 3. Enter commands with tl:
 
-    tl ls
+tl ls
 
-    ESV Daily Verse (@esvdaily) [04:46 AM]
-         A friend loves at all times, and a brother is born for adversity. http://esv.to/Pr17.17 (54842265859915777)
+ESV Daily Verse (@esvdaily) [04:46 AM]
+     A friend loves at all times, and a brother is born for adversity. http://esv.to/Pr17.17 (54842265859915777)
 
-    DHH (@dhh) [04/02/11 11:43 AM]
-         I've tried many answers for "what do you get out of working on open source?", but the truth is the act of creation is its own reward. (54222543829213184)
+DHH (@dhh) [04/02/11 11:43 AM]
+     I've tried many answers for "what do you get out of working on open source?", but the truth is the act of creation is its own reward. (54222543829213184)
 
-== Commands
+== Tasks
 
-* cat id
-* json
-* ls [screenname]
-* retweet id
-* say
-* tail [-f] [-n <number>]
-* update "New twitter status."
-* yaml
-
+  tl cat [ID]                # Display the details of a tweet with responses based on twitter id or piped in tweets.
+  tl follow [SCREEN_NAME]    # Follows the twitter user based on their screen name or piped in tweets.
+  tl help [TASK]             # Describe available tasks or one specific task
+  tl json                    # Lists tweets from the timeline in JSON format.
+  tl ls [SCREEN_NAME]        # Lists tweets from the timeline.
+  tl retweet [ID]            # Retweets the tweet by the Twitter id or a group of piped in tweets.
+  tl rm [ID]                 # Removes the tweet by it's id or a list of piped in tweets.
+  tl say                     # Speaks the tweet at the top of your timeline.
+  tl unfollow [SCREEN_NAME]  # Unfollows the twitter user based on their screen name or piped in tweets.
+  tl update STATUS           # Updates your current Twitter status.
+  tl yaml                    # Lists tweets from the timeline in YAML format.
