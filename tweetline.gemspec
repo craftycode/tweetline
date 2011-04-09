@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.name = "tweetline"
-  s.version = "0.0.1"
+  s.version = "0.0.2"
   s.summary = "Command line client for Twitter."
   s.description = "Tweetline is a command line Twitter client for those who can't imagine a better interface to anything than the command line.  Also, some folks may find it useful for automating Twitter interactions."
 
@@ -19,4 +19,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency('twitter', '~> 1.2.0')
   s.add_dependency('json', '~> 1.5.1')
+  s.add_dependency('thor', '~> 0.14.6')
 end
