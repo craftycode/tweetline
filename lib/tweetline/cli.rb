@@ -48,6 +48,13 @@ module Tweetline
       end
     end
 
+    desc "raw", "Raw output for testing."
+    def raw
+      STDIN.each do |text|
+        puts text
+      end
+    end
+
     desc "retweet [ID]", "Retweets the tweet by the Twitter id or a group of piped in tweets."
     def retweet(twitter_id = "")
       if twitter_id.strip.length > 0

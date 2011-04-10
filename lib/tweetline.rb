@@ -4,7 +4,7 @@ require 'json'
 
 module Tweetline
   class << self
-
+	  
     def cat_tweet(tweet_id, created_at, name, screen_name, text)
       Tweetline.put_tweet(tweet_id, created_at, name, screen_name, text)
       
@@ -51,7 +51,7 @@ module Tweetline
     end
 
     def is_piped_to_tweetline?
-      @is_piped_to_tweetline |= `ps -ax -o pid,args | grep -E "^#{Process.pid+1}"` =~ /\/tl[^\/]*$/
+      @is_piped_to_tweetline |= `ps -ax -o pid,args | grep -E "^[ ]*#{Process.pid+1}"` =~ /\/tl[^\/]*$/
     end
 
     def put_tweet(tweet_id, created_at, name, screen_name, text)
