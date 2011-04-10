@@ -4,27 +4,4 @@ require 'rubygems'
 require 'lib/tweetline'
 require 'lib/tweetline/cli'
 
-if ARGV[0] == "tail"
-  if ARGV[1] == "-f"
-    previous_id = "1"
-    count = 1
-    while true
-      begin
-        Twitter.home_timeline(:count => count, :since_id => previous_id).reverse_each do |tweet|
-          put_tweet(tweet.id, tweet.created_at, tweet.user.name, tweet.user.screen_name, tweet.text)
-          previous_id = tweet.id
-        end
-      rescue
-      end
-      count = 5
-      sleep(30)
-    end
-  else
-    count = ARGV[1] == "-n" && ARGV[2].to_i > 0 ? ARGV[2].to_i : 10
-    Twitter.home_timeline(:count => count).reverse_each do |tweet|
-      put_tweet(tweet.id, tweet.created_at, tweet.user.name, tweet.user.screen_name, tweet.text)
-    end
-  end
-end
-
 Tweetline::CLI.start

@@ -81,6 +81,29 @@ module Tweetline
       end
     end
 
+    desc "tail", "Displays recent tweets in chronological order."
+    method_option :follow, :type => :boolean, :aliases => "-f", :defatul => false, :banner => "Continue following tweets as they are added."
+    method_option :number, :type => :numeric, :aliases => "-n", :default => 10, :banner => "Specifies the number of tweets to display."
+    def tail
+      opts = options.dup
+
+      Signal.trap("SIGINT") do
+        exit!
+      end
+
+      previous_id = "1"
+      begin
+	tweets = Twitter.home_timeline(:count => opts[:number], :since_id => previous_id) rescue []
+        tweets.reverse_each do |tweet|
+          Tweetline.put_tweet(tweet.id, tweet.created_at, tweet.user.name, tweet.user.screen_name, tweet.text)
+          previous_id = tweet.id
+        end
+
+	sleep(30) if opts[:follow]
+
+      end while opts[:follow]
+    end
+
     desc "unfollow [SCREEN_NAME]", "Unfollows the twitter user based on their screen name or piped in tweets."
     def unfollow(screen_name = "")
       if screen_name.strip.length > 0
