@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 
 require 'rubygems'
-require 'lib/tweetline'
-require 'lib/tweetline/cli'
+require 'tweetline'
+require 'tweetline/cli'
 
 Tweetline::CLI.start
