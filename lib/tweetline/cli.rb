@@ -32,6 +32,16 @@ module Tweetline
       end
     end
 
+    desc "grep PATTERN", "Display tweets matching pattern."
+    def grep(pattern)
+      Tweetline.each_tweet do |tweet|
+	regex = Regexp.new(pattern)
+        if regex =~ tweet["name"] or regex =~ tweet["screen_name"] or regex =~ tweet["text"]
+          Tweetline.put_tweet(tweet["id"], tweet["created_at"], tweet["name"], tweet["screen_name"], tweet["text"])
+	end
+      end
+    end
+    
     desc "json", "Lists tweets from the timeline in JSON format."
     def json
       Tweetline.each_tweet do |tweet|
@@ -45,13 +55,6 @@ module Tweetline
       options[:screen_name] = screen_name if screen_name.strip.length > 0
       Tweetline.each_tweet(options) do |tweet|
         Tweetline.put_tweet(tweet["id"], tweet["created_at"], tweet["name"], tweet["screen_name"], tweet["text"])
-      end
-    end
-
-    desc "raw", "Raw output for testing."
-    def raw
-      STDIN.each do |text|
-        puts text
       end
     end
 
