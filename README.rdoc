@@ -30,6 +30,7 @@ This is a reasonably useful version of a Twitter commandline tool with much more
 
   tl cat [ID]                # Display the details of a tweet with responses based on twitter id or piped in tweets.
   tl follow [SCREEN_NAME]    # Follows the twitter user based on their screen name or piped in tweets.
+  tl grep PATTERN            # Display tweets matching pattern.
   tl help [TASK]             # Describe available tasks or one specific task
   tl json                    # Lists tweets from the timeline in JSON format.
   tl ls [SCREEN_NAME]        # Lists tweets from the timeline.
