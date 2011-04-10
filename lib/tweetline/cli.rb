@@ -4,6 +4,10 @@ module Tweetline
       super
       Tweetline.configure_twitter
       Tweetline.configure_pipes
+
+      Signal.trap("SIGINT") do
+        exit!
+      end
     end
 
     default_task :ls
@@ -95,23 +99,17 @@ module Tweetline
     method_option :follow, :type => :boolean, :aliases => "-f", :defatul => false, :banner => "Continue following tweets as they are added."
     method_option :number, :type => :numeric, :aliases => "-n", :default => 10, :banner => "Specifies the number of tweets to display."
     def tail
-      opts = options.dup
-
-      Signal.trap("SIGINT") do
-        exit!
-      end
-
       previous_id = "1"
       begin
-	tweets = Twitter.home_timeline(:count => opts[:number], :since_id => previous_id) rescue []
+	tweets = Twitter.home_timeline(:count => options[:number], :since_id => previous_id) rescue []
         tweets.reverse_each do |tweet|
           Tweetline.put_tweet(tweet.id, tweet.created_at, tweet.user.name, tweet.user.screen_name, tweet.text)
           previous_id = tweet.id
         end
 
-	sleep(30) if opts[:follow]
+	sleep(30) if options[:follow]
 
-      end while opts[:follow]
+      end while options[:follow]
     end
 
     desc "unfollow [SCREEN_NAME]", "Unfollows the twitter user based on their screen name or piped in tweets."
