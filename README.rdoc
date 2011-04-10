@@ -1,4 +1,4 @@
-This is the initial proof of concept for a twitter command line tool.  Now that I understand the problem, I am currently in the process of writing a more robust implementation.
+This is a reasonably useful version of a Twitter commandline tool with much more functionality to come.  The biggest part that is missing currently is seemless authentication with Twitter's xAuth, which will be added once they approve the request.
 
 == Getting Started
 
@@ -22,6 +22,9 @@ This is the initial proof of concept for a twitter command line tool.  Now that 
 
     DHH (@dhh) [04/02/11 11:43 AM]
          I've tried many answers for "what do you get out of working on open source?", but the truth is the act of creation is its own reward. (54222543829213184)
+
+    Anthony Crumley (@anthonycrumley) [04/08/11 10:41 PM]
+         Writing code for the fun of it is its own reward.  When we create for the joy of creating we imitate our creator. (56562348806242304)
 
 == Tasks
 
