@@ -1,9 +1,50 @@
 require 'thor'
 require 'twitter'
 require 'json'
+require 'oauth'
+require 'shortly'
 
 module Tweetline
+  CONSUMER_KEY = "cbaTxnPKFhGAngIYDqsNyg"
+  CONSUMER_SECRET = "FTrMluAB5pMPEZZRoGmOf2AH3md2KSqW6PNwD7TAzc"
+
   class << self
+
+    def authorize_user
+      api_url = "https://api.twitter.com"
+      consumer = OAuth::Consumer.new(Tweetline::CONSUMER_KEY, Tweetline::CONSUMER_SECRET, :site => api_url)
+      request_token = consumer.get_request_token
+
+      request = consumer.create_signed_request(:get, consumer.authorize_path, request_token, {:oauth_callback => 'oob'})
+      params = request['Authorization'].sub(/^OAuth\s+/, '').split(/,\s+/).map { |p|
+        k, v = p.split('=')
+        v =~ /"(.*?)"/
+        "#{k}=#{CGI::escape($1)}"
+      }.join('&')
+      auth_url = "#{api_url}#{request.path}?#{params}"
+      
+      #bitly = Bitly.new("tweetline", "R_c27cfa45caf4f11cea7fb224056fb7f5")
+      bitly = Shortly::Clients::Bitly
+      
+      puts
+      puts "Follow these steps to access your twitter account."
+      puts 
+      puts "1) Navigate to the following url..."
+      puts
+      puts bitly.shorten(auth_url, {:apiKey => 'R_c27cfa45caf4f11cea7fb224056fb7f5', :login => 'tweetline'}).url
+      puts
+      puts "2) Allow Tweet-line access to your twitter account..."
+      puts
+      puts "3) Enter your pin number..."
+      puts
+      pin = gets
+      puts
+
+      access_token = request_token.get_access_token(:oauth_verifier => pin.chomp)
+      File.open(rc_file_name, "w") do |f|
+        f.write({:oauth_token => access_token.token, :oauth_token_secret => access_token.secret}.to_yaml)
+      end
+    end
 	  
     def cat_tweet(tweet_id, created_at, name, screen_name, text)
       Tweetline.put_tweet(tweet_id, created_at, name, screen_name, text)
@@ -17,14 +58,19 @@ module Tweetline
     end
 
     def configure_twitter
-      Twitter.configure do |config|
-        File.open(File.expand_path('~/.tweetlinerc')) do |yaml|
-          options = YAML.load(yaml)
-          config.consumer_key = options[:consumer_key]
-          config.consumer_secret = options[:consumer_secret]
-          config.oauth_token = options[:oauth_token]
-          config.oauth_token_secret = options[:oauth_token_secret]
+      if File.exist?(rc_file_name)
+        Twitter.configure do |config|
+          File.open(rc_file_name) do |yaml|
+            options = YAML.load(yaml)
+            config.consumer_key = options[:consumer_key] || Tweetline::CONSUMER_KEY
+            config.consumer_secret = options[:consumer_secret] || Tweetline::CONSUMER_SECRET
+            config.oauth_token = options[:oauth_token]
+            config.oauth_token_secret = options[:oauth_token_secret]
+          end
         end
+      else
+        Tweetline.authorize_user
+	configure_twitter
       end
     end
 
@@ -77,6 +123,11 @@ module Tweetline
     
       return time.strftime(format)
     end
-    
+
+    private
+
+    def rc_file_name
+      File.expand_path('~/.tweetlinerc')
+    end
   end
 end
