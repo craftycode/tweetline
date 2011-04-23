@@ -1,4 +1,4 @@
-This is a reasonably useful version of a Twitter commandline tool with much more functionality to come.  The biggest part that is missing currently is seemless authentication with Twitter's xAuth, which will be added once they approve the request.
+This is a reasonably useful version of a Twitter commandline tool with much more functionality to come.
 
 == Getting Started
 
@@ -6,12 +6,21 @@ This is a reasonably useful version of a Twitter commandline tool with much more
 
     gem install tweetline
 
-2. Until Twitter approves xAuth for Tweetline, you will have to create a ~/.tweetlinerc yaml file with your authentication credentials like the following...
+2. Authorize your account through twitter:
 
-    :consumer_key: "your-key"
-    :consumer_secret: "your-secret"
-    :oauth_token: "your-token"
-    :oauth_token_secret: "your-secret"
+    :~$ tl
+    
+    Follow these steps to access your twitter account.
+    
+    1) Navigate to the following url...
+    
+    http://bit.ly/<token>
+    
+    2) Allow Tweet-line access to your twitter account...
+    
+    3) Enter your pin number...
+
+    < insert PIN here >
 
 3. Enter commands with tl:
 
