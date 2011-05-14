@@ -62,6 +62,20 @@ module Tweetline
       end
     end
 
+    desc "reply ID, REPLY", "Replies to the specified tweet with @screenname at the beginning."
+    def reply(twitter_id, status)
+      status = "@#{Twitter.status(twitter_id).user.screen_name} #{status}"
+      if status.length > 140
+        puts ""
+        puts "This status is too long."
+	puts ""
+	puts "     #{status[0..139]}"
+	puts ""
+      else
+        Twitter.update(status, :in_reply_to_status_id => twitter_id)
+      end
+    end
+
     desc "retweet [ID]", "Retweets the tweet by the Twitter id or a group of piped in tweets."
     def retweet(twitter_id = "")
       if twitter_id.strip.length > 0
@@ -96,12 +110,21 @@ module Tweetline
     end
 
     desc "tail", "Displays recent tweets in chronological order."
-    method_option :follow, :type => :boolean, :aliases => "-f", :defatul => false, :banner => "Continue following tweets as they are added."
-    method_option :number, :type => :numeric, :aliases => "-n", :default => 10, :banner => "Specifies the number of tweets to display."
+    method_option :follow, :type => :boolean, :aliases => "-f", :default => false, :banner => "Continue following tweets as they are added."
+    method_option :number, :type => :numeric, :aliases => "-n", :default => 10, :banner => "Specifies the number of tweets to display.  This option is ignored if the follow option is true."
     def tail
       previous_id = "1"
       begin
-	tweets = Twitter.home_timeline(:count => options[:number], :since_id => previous_id) rescue []
+	if options[:follow] 
+          if previous_id == "1"
+	    count = 1 
+	  else
+            count = 100
+	  end
+	else
+          count = options[:number]
+	end
+	tweets = Twitter.home_timeline(:count => count, :since_id => previous_id) rescue []
         tweets.reverse_each do |tweet|
           Tweetline.put_tweet(tweet.id, tweet.created_at, tweet.user.name, tweet.user.screen_name, tweet.text)
           previous_id = tweet.id

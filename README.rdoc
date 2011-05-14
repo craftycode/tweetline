@@ -43,6 +43,7 @@ This is a reasonably useful version of a Twitter commandline tool with much more
   tl help [TASK]             # Describe available tasks or one specific task
   tl json                    # Lists tweets from the timeline in JSON format.
   tl ls [SCREEN_NAME]        # Lists tweets from the timeline.
+  tl reply ID, REPLY         # Replies to the specified tweet with @screenname at the beginning.
   tl retweet [ID]            # Retweets the tweet by the Twitter id or a group of piped in tweets.
   tl rm [ID]                 # Removes the tweet by it's id or a list of piped in tweets.
   tl say                     # Speaks the tweet at the top of your timeline.
