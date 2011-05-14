@@ -1,9 +1,14 @@
 Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.name = "tweetline"
-  s.version = "0.0.8"
+  s.version = "0.0.9"
   s.summary = "Command line client for Twitter."
   s.description = "Tweetline is a command line Twitter client for those who can't imagine a better interface to anything than the command line.  Also, some folks may find it useful for automating Twitter interactions."
+  s.post_install_message = <<-MESSAGE
+
+    If this is your first install then enter "tl" at the command prompt and follow the instructions to allow tweetline access to your twitter account.  Once access to Twitter has been granted, use "tl help" to display a list of commands available through tweetline.
+
+  MESSAGE
 
   s.required_ruby_version = ">= 1.8.7"
   s.required_rubygems_version = ">= 1.3.6"
